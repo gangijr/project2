@@ -51,6 +51,11 @@ app.get("/players/:id", (req, res) => {
   );
 });
 
+// gets report.html
+app.get("/report.html", (req, res) => {
+  res.sendFile(__dirname + "/report.html");
+});
+
 // post a new player
 app.post("/players", (req, res) => {
   if (
