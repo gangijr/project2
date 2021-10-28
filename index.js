@@ -32,12 +32,13 @@ connection.connect((error) => {
 // gets all players
 app.get("/players", (req, res) => {
   connection.query(
-    `SELECT fullName,screenName,wins,losses FROM project_2_347.players`,
+    `SELECT fullName,screenName,wins,losses FROM project_2_347.players WHERE isDeleted = 0`,
     (err, results) => {
-      if (err || checkDelete(req.params.isDeleted)) {
+      if (err) {
         console.log(err);
+      } else {
+        res.send(results);
       }
-      res.send(results);
     }
   );
 });
@@ -45,11 +46,16 @@ app.get("/players", (req, res) => {
 // gets player by ID
 app.get("/players/:id", (req, res) => {
   connection.query(
-    `SELECT fullName,screenName,wins,losses FROM project_2_347.players WHERE player_ID = ${req.params.id}`,
+    `SELECT fullName,screenName,wins,losses FROM project_2_347.players WHERE player_ID = ${req.params.id} AND isDeleted = 0`,
     (err, results) => {
-      if (err || checkDelete(req.params.isDeleted)) {
+      if (err) {
         console.log(err);
       }
+      //   if (checkDelete(req.params.isDeleted)) {
+      //     console.log(
+      //       "You are trying to access a deleted player profile. Please try another."
+      //     );
+      //   }
       res.send(results);
     }
   );
@@ -90,18 +96,19 @@ app.post("/players", (req, res) => {
 
 // deletes player by ID
 app.delete("/players/:id", (req, res) => {
-  const parameters = [parseInt(req.params.id)];
+  //const parameters = [parseInt(req.params.id)];
 
-  const query = `UPDATE playrs SET isDeleted = 1 WHERE player_ID = ?`;
-  connection.query(query, parameters, (error, result) => {
+  const query = `UPDATE players SET isDeleted = 1 WHERE player_ID = ${req.params.id}`;
+  connection.query(query, (error, result) => {
     if (error) {
-      response.status(404);
-      response.json({
+      res.status(404);
+      res.json({
         ok: false,
         results: error.message,
       });
     } else {
-      response.json({
+      console.log(result);
+      res.json({
         ok: true,
       });
     }

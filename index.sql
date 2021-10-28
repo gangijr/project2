@@ -7,5 +7,5 @@ CREATE TABLE players(
     ranking INTEGER NULL,
     wins INTEGER NOT NULL,
     losses INTEGER NOT NULL,
-    isDeleted BINARY NOT NULL
+    isDeleted INTEGER DEFAULT 0
 );
