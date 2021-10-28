@@ -27,7 +27,7 @@ connection.connect((error) => {
 // gets all players
 app.get("/players", (req, res) => {
   connection.query(
-    `SELECT fullName,screenName,wins,losses FROM project_2_347.players WHERE isDeleted = 0`,
+    `SELECT fullName,screenName,wins,losses FROM scores.players WHERE isDeleted = 0`,
     (err, results) => {
       if (err) {
         console.log(err);
@@ -41,7 +41,7 @@ app.get("/players", (req, res) => {
 // gets player by ID
 app.get("/players/:id", (req, res) => {
   connection.query(
-    `SELECT fullName,screenName,wins,losses FROM project_2_347.players WHERE player_ID = ${req.params.id} AND isDeleted = 0`,
+    `SELECT fullName,screenName,wins,losses FROM scores.players WHERE player_ID = ${req.params.id} AND isDeleted = 0`,
     (err, results) => {
       if (err) {
         console.log(err);
@@ -128,7 +128,7 @@ app.patch("/players/:id", (req, res) => {
 });
 
 app.listen(5000, () => {
-  console.log("running on post 5000!");
+  console.log("running on port 5000!");
 });
 
 // connection.end();
