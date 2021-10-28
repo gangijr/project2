@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+REPORT - Project 2 - CS 347 - James Gangi
+
+1.	Your service will not manage a to-do list. This is overdone. Come up with something interesting and original.
+
+Creating a relational DB for comparing scores in esports over long periods of time. Then using said scores/ who they played against to create rankings.
+
+2.	You will store your app’s data long-term in an SQL-based relational database like MySQL. There’s nothing wrong with NoSQL databases like MongoDB, but they are intentionally outlawed for this project in order to align our focus and to give you more experience with relational databases. Though you will use a relational database, your database need not have multiple tables.
+
+Using one table in mysql ‘players’
+
+3.	You will provide an Express-based web service for interacting with the database.
+
+Installed express and I use it in index.js
+
+4.	Your web service will be available via https://project2.YOUR-DOMAIN-NAME:8443/.
+
+yes
+
+5.	The endpoints of the web service and any parameters must be appropriately named.
+
+They are named, get, patch, post, delete
+
+6.	The web service must send and receive complex data as JSON.
+
+It does
+
+7.	The full spectrum of CRUD operations must be supported.
+
+C – post 
+R - get
+U – patch
+D - delete 
+
+8.	The database must only be directly accessible from within your droplet, and not from outside. Use ufw to block all ports but the ones you need for SSH and your allowed web servers.
+
+yes
+
+9.	You will create an Nginx server that allows global, encrypted access to your web service.
+    
+        It runs on Nginx server
+    
+10.	The web service must support cross-origin resource sharing using custom middleware and an options wildcard endpoint.
+
+        It does 
+
+11.	Your web service must be started using a process manager like pm2 so that it stays running.
+
+        It is using pm2 as the process manager
+
+12.	Your service must be stored in a Git repository that you have shared with your instructor. On GitHub, GitLab, and Bitbucket, share with the user twodee.
+
+        https://github.com/gangijr/project2
+
+13.	Your database’s creation and schema scripts must be included in your repository. Passwords must not be included.
+	
+	Passwords are hidden in credentials.json
+
+Some example curl command that you can run on this project are :
+
+curl https://project2.jgangi.me:8443/players        
+
+    Will get a list of all players currently in the data base
+
+curl https://project2.jgangi.me:8443/players/?         
+
+    When ‘?’ is an integer value that matches to a ID it will get that particular player
+
+curl --header 'Content-Type: application/json' \
+  --data '{“fullName“: “name”, screenName" : “test”}' \
+  https://project2.jgangi.me:8443/players
+
+    This will add a player to the database and automatically assigns a ID to it based on table size
+
+curl --header 'Content-Type: application/json' \
+  --request PATCH \
+  --data '{ screenName" : “testing_patch”}}' \
+  https://project2.jgangi.me:8443/players/2
+
+    This would change the screenName of the player with ID 2 to ‘testing_patch’
+
+curl --request DELETE \
+  https://project2.jgangi.me:8443/players/2 
+
+    This command would delete player2 from the database (soft delete)
+
+    </p>
+</body>
+</html>
