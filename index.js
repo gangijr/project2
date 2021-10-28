@@ -15,11 +15,6 @@ app.use(express.urlencoded({ extended: false }));
 const json = fs.readFileSync("credentials.json", "utf8");
 const credentials = JSON.parse(json);
 
-function checkDelete(p1) {
-  if (p1 == 1) return true;
-  return false;
-}
-
 // creates new connection using credentials and checks for errors
 const connection = mysql.createConnection(credentials);
 connection.connect((error) => {
@@ -51,11 +46,6 @@ app.get("/players/:id", (req, res) => {
       if (err) {
         console.log(err);
       }
-      //   if (checkDelete(req.params.isDeleted)) {
-      //     console.log(
-      //       "You are trying to access a deleted player profile. Please try another."
-      //     );
-      //   }
       res.send(results);
     }
   );
