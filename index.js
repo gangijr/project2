@@ -138,7 +138,7 @@ app.patch("/players/:id", (req, res) => {
 app.patch("/players/:id/1", (req, res) => {
   const parameters = [req.body.wins];
 
-  const que = `UPDATE players SET wins = ${req.params.wins} WHERE player_ID = ${req.params.id}`;
+  const que = `UPDATE players SET wins = wins+1 WHERE player_ID = ${req.params.id}`;
 
   connection.query(que, parameters, (error, result) => {
     if (error) {
@@ -160,7 +160,7 @@ app.patch("/players/:id/1", (req, res) => {
 app.patch("/players/:id/0", (req, res) => {
   const parameters = [req.body.losses];
 
-  const que = `UPDATE players SET losses = ${req.params.losses}+1 WHERE player_ID = ${req.params.id}`;
+  const que = `UPDATE players SET losses = losses+1 WHERE player_ID = ${req.params.id}`;
 
   connection.query(que, parameters, (error, result) => {
     if (error) {
