@@ -132,6 +132,52 @@ app.patch("/players/:id", (req, res) => {
   });
 });
 
+//need to add patch for wins and losses so that you can add wins and losses
+
+//patch to add to wins given and id and the number 1
+app.patch("/players/:id/1", (req, res) => {
+  const parameters = [req.body.wins];
+
+  const que = `UPDATE players SET wins = ${req.params.wins} WHERE player_ID = ${req.params.id}`;
+
+  connection.query(que, parameters, (error, result) => {
+    if (error) {
+      res.status(404);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      console.log(result);
+      res.json({
+        ok: true,
+      });
+    }
+  });
+});
+
+//patch to add to losses given and id and the number 0
+app.patch("/players/:id/0", (req, res) => {
+  const parameters = [req.body.losses];
+
+  const que = `UPDATE players SET losses = ${req.params.losses}+1 WHERE player_ID = ${req.params.id}`;
+
+  connection.query(que, parameters, (error, result) => {
+    if (error) {
+      res.status(404);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      console.log(result);
+      res.json({
+        ok: true,
+      });
+    }
+  });
+});
+
 app.listen(5000, () => {
   console.log("running on port 5000!");
 });
