@@ -24,16 +24,16 @@ connection.connect((error) => {
   }
 });
 
-service.use((request, response, next) => {
+app.use((request, response, next) => {
   response.set("Access-Control-Allow-Origin", "*");
   next();
 });
 
-// service.options("*", (request, response) => {
-//   response.set("Access-Control-Allow-Headers", "Content-Type");
-//   response.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
-//   response.sendStatus(200);
-// });
+app.options("*", (request, response) => {
+  response.set("Access-Control-Allow-Headers", "Content-Type");
+  response.set("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
+  response.sendStatus(200);
+});
 
 // gets all players
 app.get("/players", (req, res) => {
