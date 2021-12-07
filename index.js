@@ -24,10 +24,10 @@ connection.connect((error) => {
   }
 });
 
-// service.use((request, response, next) => {
-//   response.set("Access-Control-Allow-Origin", "*");
-//   next();
-// });
+service.use((request, response, next) => {
+  response.set("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 // service.options("*", (request, response) => {
 //   response.set("Access-Control-Allow-Headers", "Content-Type");
