@@ -126,7 +126,7 @@ app.delete("/players", (req, res) => {
   //const parameters = [parseInt(req.params.id)];
   const sN = req.body.screenName;
   const query = `UPDATE players SET isDeleted = 1 WHERE screenName = (?)`,
-    [sN];
+    sN;
   connection.query(query, (error, result) => {
     if (error) {
       res.status(404);
