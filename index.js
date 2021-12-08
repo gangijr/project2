@@ -38,7 +38,7 @@ app.options("*", (request, response) => {
 // gets all players
 app.get("/players", (req, res) => {
   connection.query(
-    `SELECT fullName,screenName,wins,losses FROM scores.players WHERE isDeleted = 0`,
+    `SELECT player_ID,fullName,screenName,wins,losses FROM scores.players WHERE isDeleted = 0`,
     (err, results) => {
       if (err) {
         console.log(err);
