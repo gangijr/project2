@@ -121,6 +121,27 @@ app.delete("/players/:id", (req, res) => {
   });
 });
 
+// deletes player by screen name
+app.delete("/players/:screenName", (req, res) => {
+  //const parameters = [parseInt(req.params.id)];
+
+  const query = `UPDATE players SET isDeleted = 1 WHERE screenName = ${req.params.screenName}`;
+  connection.query(query, (error, result) => {
+    if (error) {
+      res.status(404);
+      res.json({
+        ok: false,
+        results: error.message,
+      });
+    } else {
+      console.log(result);
+      res.json({
+        ok: true,
+      });
+    }
+  });
+});
+
 // updates the player screeName based on input given ID
 app.patch("/players/:id", (req, res) => {
   const parameters = [req.body.screenName];
